@@ -8,15 +8,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class JsonFileCreatorUnitTest implements WithAssertions{
-  final ObjectMapper mapper = new ObjectMapper();
-
   @Test
   void whenMapJsonWrite_thenCorrect() throws
     JsonProcessingException, FileNotFoundException, IOException {
