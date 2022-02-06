@@ -70,7 +70,7 @@ class AESUtilsUnitTest implements WithAssertions {
     InvalidAlgorithmParameterException, NoSuchPaddingException, IOException, BadPaddingException,
     ClassNotFoundException {
     // given
-    Credentials credentials = new Credentials("cone@email.com", "qwerty123");
+    Credentials credentials = new Credentials("cone@email.com", "qwerty123", "My credentials");
     SecretKey key = AESUtils.generateKey(128);
     IvParameterSpec ivParameterSpec = AESUtils.generateIv();
     String algorithm = "AES/CBC/PKCS5Padding";
