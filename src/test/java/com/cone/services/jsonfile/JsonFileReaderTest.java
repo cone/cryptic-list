@@ -3,6 +3,7 @@ package com.cone.services.jsonfile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Map;
 
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Assertions;
@@ -13,8 +14,8 @@ public class JsonFileReaderTest implements WithAssertions {
   void testRead() throws IOException {
     File jsonFile = Paths.get("src/test/resources/test.json").toFile();
     JsonFileReader service = new JsonFileReader(jsonFile);
-    String content = service.read();
+    Map<String, String> content = service.read();
 
-    Assertions.assertEquals("{\"hello\":\"world\"}", content);
+    Assertions.assertEquals("world", content.get("hello"));
   }
 }
