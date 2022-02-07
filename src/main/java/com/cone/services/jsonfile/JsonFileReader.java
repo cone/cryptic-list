@@ -1,4 +1,4 @@
-package com.cone.services;
+package com.cone.services.jsonfile;
 
 import java.io.IOException;
 import java.io.InputStream;
