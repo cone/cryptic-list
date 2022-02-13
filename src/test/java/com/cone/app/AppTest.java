@@ -1,6 +1,6 @@
 package com.cone.app;
 
-import static org.junit.Assert.assertTrue;
+// import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -9,12 +9,13 @@ import org.junit.Test;
  */
 public class AppTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
     @Test
     public void shouldAnswerWithTrue()
     {
-        assertTrue( true );
+        String[] args = new String[1];
+
+        args[0] = "-ls";
+
+        App.main(args);
     }
 }
