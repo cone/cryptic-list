@@ -3,8 +3,8 @@ package com.cone.services.registry;
 import java.io.File;
 import java.util.Map;
 
-import com.cone.services.jsonfile.JsonFileLocator;
 import com.cone.services.jsonfile.JsonFileReader;
+import com.cone.services.utils.FileLocator;
 
 public class RegistriesLoader {
   private String fileName;
@@ -20,7 +20,7 @@ public class RegistriesLoader {
   }
 
   private void loadJsonFile() throws Exception {
-    String inputFilePath = JsonFileLocator.getPath(fileName);
+    String inputFilePath = FileLocator.getPath(fileName);
     File jsonFile = new File(inputFilePath);
     service = new JsonFileReader(jsonFile);
   }

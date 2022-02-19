@@ -5,26 +5,30 @@ import java.util.Map;
 
 import com.cone.app.Credentials;
 
-import org.assertj.core.api.WithAssertions;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class RegistryReaderTest implements WithAssertions {
-  @Test
-  void testListAll() {
-    File jsonFile = new File("src/test/resources/data.json");
-    RegistryReader service = new RegistryReader(jsonFile, "qwerty");
-    Map<String, String> entries = service.listAll();
+public class RegistryReaderTest {
+  static RegistryReader service;
 
-    Assert.assertEquals("My Credentials", entries.get("12345678"));
+  @BeforeAll
+  static void setup() {
+    File jsonFile = new File("src/test/resources/data.json");
+    service = new RegistryReader(jsonFile, "qwerty");
   }
 
   @Test
-  void testRead() throws Exception {
-    File jsonFile = new File("src/test/resources/data.json");
-    RegistryReader service = new RegistryReader(jsonFile, "qwerty");
+  void whenAllEntriesAreListed_thenSuccess() {
+    Map<String, String> entries = service.listAll();
+
+    Assertions.assertEquals("My Credentials", entries.get("12345678"));
+  }
+
+  @Test
+  void givenAFilePath_whenReadingAnEntry_thenSuccess() throws Exception {
     Credentials creds = service.read("src/test/resources/12345678");
 
-    Assert.assertEquals("cone@email.com", creds.getUser());
+    Assertions.assertEquals("cone@email.com", creds.getUser());
   }
 }

@@ -9,8 +9,8 @@ import com.cone.app.Credentials;
 import com.cone.services.credentials.CredentialsDecrypter;
 
 public class RegistryReader extends RegistryBase {
-  public RegistryReader(File file, String password) {
-    this.file = file;
+  public RegistryReader(File entriesFile, String password) {
+    this.entriesFile = entriesFile;
     this.password = password;
   }
 

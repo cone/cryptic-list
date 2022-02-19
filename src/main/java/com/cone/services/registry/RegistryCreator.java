@@ -8,13 +8,14 @@ import javax.crypto.spec.IvParameterSpec;
 import com.cone.app.Credentials;
 import com.cone.services.credentials.CredentialsEncrypter;
 import com.cone.services.jsonfile.JsonFileCreator;
+import com.cone.services.utils.FileLocator;
 import com.cone.services.utils.IdGenerator;
 
 public class RegistryCreator extends RegistryBase {
   IdGenerator idGenerator;
 
-  public RegistryCreator(File file, String password, IdGenerator idGenerator) {
-    this.file = file;
+  public RegistryCreator(File entriesFile, String password, IdGenerator idGenerator) {
+    this.entriesFile = entriesFile;
     this.password = password;
     this.idGenerator = idGenerator;
   }
@@ -23,11 +24,12 @@ public class RegistryCreator extends RegistryBase {
     loadEntries();
 
     String outputFileName = getUniqueId();
-    File outputFile = new File(outputFileName);
+    String outputFilePath = FileLocator.getPath(outputFileName);
+    File outputFile = new File(outputFilePath);
     encryptEntry(outputFile, creds);
 
     entries.put(outputFileName, description);
-    writeFile(file, entries);
+    writeFile(entriesFile, entries);
   }
 
   private String getUniqueId() {

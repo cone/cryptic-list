@@ -4,8 +4,8 @@ import java.io.File;
 import java.net.URISyntaxException;
 
 import com.cone.app.Credentials;
-import com.cone.services.jsonfile.JsonFileLocator;
 import com.cone.services.utils.IdGenerator;
+import com.cone.services.utils.FileLocator;
 import com.cone.services.utils.UuidGenerator;
 
 public class RegistryWritter {
@@ -23,7 +23,7 @@ public class RegistryWritter {
   }
 
   private File getFile() throws URISyntaxException {
-    String inputFilePath = JsonFileLocator.getPath(fileName);
+    String inputFilePath = FileLocator.getPath(fileName);
     return new File(inputFilePath);
   }
 

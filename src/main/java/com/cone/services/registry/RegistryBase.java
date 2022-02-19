@@ -10,7 +10,7 @@ import javax.crypto.spec.IvParameterSpec;
 import com.cone.services.jsonfile.JsonFileReader;
 
 public abstract class RegistryBase {
-  File file;
+  File entriesFile;
   public final String SALT = "12345678";
   Map<String, String> entries;
   String password;
@@ -22,7 +22,7 @@ public abstract class RegistryBase {
 
   protected void loadEntries() {
     try {
-      entries = readFile(file);
+      entries = readFile(entriesFile);
     } catch(IOException error) {
       entries = new HashMap<>();
     }
