@@ -5,9 +5,7 @@ import java.net.URISyntaxException;
 import java.util.Scanner;
 
 import com.cone.app.Credentials;
-import com.cone.mock.FakeIdGenerator;
 import com.cone.services.utils.FileLocator;
-import com.cone.services.utils.IdGenerator;
 
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.AfterEach;

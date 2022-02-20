@@ -28,8 +28,7 @@ public class App
             String user = console.readLine("%s", "user (email or name): ");
             String password = new String(console.readPassword("user password: "));
             String desc = console.readLine("%s", "short description: ");
-            RegistryWritter registryWritter = new RegistryWritter("data.json", key);
-            registryWritter.setIdGenerator(new UuidGenerator());
+            RegistryWritter registryWritter = new RegistryWritter("data.json", key, new UuidGenerator());
             Credentials creds = new Credentials(user, password, desc);
             registryWritter.addRegistry(creds, desc);
         } else if(params.include("r")) {

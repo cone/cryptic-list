@@ -12,18 +12,12 @@ public class RegistryWritter {
   RegistryCreator service;
   IdGenerator idGenerator;
 
-  public RegistryWritter(String entriesFile, String key) throws URISyntaxException {
+  public RegistryWritter(String entriesFile, String key, IdGenerator idGenerator)
+    throws URISyntaxException {
     this.entriesFile = entriesFile;
     this.key = key;
-    initCreator();
-  }
-
-  public IdGenerator getIdGenerator() {
-    return idGenerator;
-  }
-
-  public void setIdGenerator(IdGenerator idGenerator) {
     this.idGenerator = idGenerator;
+    initCreator();
   }
 
   public void addRegistry(Credentials creds, String description) throws Exception {
