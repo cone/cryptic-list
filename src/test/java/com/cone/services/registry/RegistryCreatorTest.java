@@ -19,13 +19,13 @@ public class RegistryCreatorTest implements WithAssertions {
   File outputFile;
   File objectFile;
   RegistryCreator service;
+  final String fileId = "12345678";
 
   @BeforeEach
   void setup() throws URISyntaxException {
     outputFile = new File("data.json");
-    objectFile = new File(FileLocator.getPath("12345678"));
-    IdGenerator idGen = new FakeIdGenerator();
-    service = new RegistryCreator(outputFile, "qwerty", idGen);
+    objectFile = new File(FileLocator.getPath(fileId));
+    service = new RegistryCreator(outputFile, "qwerty");
   }
 
   @AfterEach
@@ -37,7 +37,7 @@ public class RegistryCreatorTest implements WithAssertions {
   @Test
   void givenSomeCredentialsAndDescription_whenWritting_thenSuccess() throws Exception {
     Credentials creds = new Credentials("cone@email.com", "qwerty123", "Description");
-    service.write(creds, "My Credentials");
+    service.write(creds, "My Credentials", fileId);
 
     Scanner myReader = new Scanner(outputFile);
     String data = "";

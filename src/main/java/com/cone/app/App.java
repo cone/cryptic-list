@@ -6,6 +6,7 @@ import java.util.Map;
 import com.cone.services.commandline.Parameters;
 import com.cone.services.registry.RegistriesTable;
 import com.cone.services.registry.RegistryWritter;
+import com.cone.services.utils.UuidGenerator;
 import com.cone.services.registry.RegistriesLoader;
 
 public class App 
@@ -28,6 +29,7 @@ public class App
             String password = new String(console.readPassword("user password: "));
             String desc = console.readLine("%s", "short description: ");
             RegistryWritter registryWritter = new RegistryWritter("data.json", key);
+            registryWritter.setIdGenerator(new UuidGenerator());
             Credentials creds = new Credentials(user, password, desc);
             registryWritter.addRegistry(creds, desc);
         } else if(params.include("r")) {

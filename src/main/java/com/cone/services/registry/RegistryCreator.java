@@ -9,31 +9,23 @@ import com.cone.app.Credentials;
 import com.cone.services.credentials.CredentialsEncrypter;
 import com.cone.services.jsonfile.JsonFileCreator;
 import com.cone.services.utils.FileLocator;
-import com.cone.services.utils.IdGenerator;
 
 public class RegistryCreator extends RegistryBase {
-  IdGenerator idGenerator;
-
-  public RegistryCreator(File entriesFile, String password, IdGenerator idGenerator) {
+  public RegistryCreator(File entriesFile, String password) {
     this.entriesFile = entriesFile;
     this.password = password;
-    this.idGenerator = idGenerator;
   }
 
-  public void write(Credentials creds, String description) throws Exception {
+  public void write(Credentials creds, String description, String fileId)
+    throws Exception {
     loadEntries();
 
-    String outputFileName = getUniqueId();
-    String outputFilePath = FileLocator.getPath(outputFileName);
+    String outputFilePath = FileLocator.getPath(fileId);
     File outputFile = new File(outputFilePath);
     encryptEntry(outputFile, creds);
 
-    entries.put(outputFileName, description);
+    entries.put(fileId, description);
     writeFile(entriesFile, entries);
-  }
-
-  private String getUniqueId() {
-    return idGenerator.createNewId();
   }
 
   private void encryptEntry(File outputFile, Credentials creds) throws Exception {
