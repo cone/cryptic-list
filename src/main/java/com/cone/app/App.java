@@ -1,42 +1,31 @@
 package com.cone.app;
 
-import java.io.Console;
-import java.util.Map;
-
+import com.cone.services.commandline.EntryLister;
+import com.cone.services.commandline.EntryReader;
+import com.cone.services.commandline.EntryWizard;
 import com.cone.services.commandline.Parameters;
-import com.cone.services.registry.RegistriesTable;
 import com.cone.services.registry.RegistryWritter;
 import com.cone.services.utils.UuidGenerator;
-import com.cone.services.registry.RegistriesLoader;
 
 public class App 
 {
   public static void main( String[] args )
   {
+    String entryFilePath = "data.json";
+
     try {
         Parameters params = new Parameters(args);
-        RegistriesLoader entryLoader = new RegistriesLoader("data.json");
-        Map<String, String> entries = entryLoader.getEntries();
-        RegistriesTable table = new RegistriesTable(entries);
 
         if(params.include("ls")) {
-            String rend = table.render();
-            System.out.println(rend);
+            EntryLister entryLister = new EntryLister(entryFilePath);
+            entryLister.list();
         } else if(params.include("a")) {
-            Console console = System.console();
-            String key = new String(console.readPassword("key: "));
-            String user = console.readLine("%s", "user (email or name): ");
-            String password = new String(console.readPassword("user password: "));
-            String desc = console.readLine("%s", "short description: ");
-            RegistryWritter registryWritter = new RegistryWritter("data.json", key, new UuidGenerator());
-            Credentials creds = new Credentials(user, password, desc);
-            registryWritter.addRegistry(creds, desc);
+            EntryWizard wiz = new EntryWizard();
+            RegistryWritter registryWritter = new RegistryWritter(entryFilePath, wiz.getKey(), new UuidGenerator());
+            registryWritter.addRegistry(wiz.getCredentials(), wiz.getDescription());
         } else if(params.include("r")) {
-            Console console = System.console();
-            String password = new String(console.readPassword("key: "));
-            String id = params.getValue("r");
-            System.out.println(password);
-            System.out.println(id);
+            EntryReader reader = new EntryReader(params.getValue("r"), entryFilePath);
+            reader.display();
         }
     }
     catch (Exception exp) {
