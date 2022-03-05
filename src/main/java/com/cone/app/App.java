@@ -26,6 +26,8 @@ public class App
         } else if(params.include("r")) {
             EntryReader reader = new EntryReader(params.getValue("r"), entryFilePath);
             reader.display();
+        } else if(params.include("h")) {
+            params.printHelp();
         }
     }
     catch (Exception exp) {
