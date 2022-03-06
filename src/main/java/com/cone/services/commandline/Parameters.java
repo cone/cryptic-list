@@ -1,5 +1,7 @@
 package com.cone.services.commandline;
 
+import com.cone.utils.PasswordGenerator;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -40,8 +42,15 @@ public class Parameters {
     options.addOption("ls", false, "display entry list");
     options.addOption("r", true, "read entry values");
     options.addOption("a", false, "add new entry");
+    options.addOption("ap", false, getApDescription());
     options.addOption("h", false, "show help");
 
     return options;
+  }
+
+  private String getApDescription() {
+    return "add a new entry with auto-generated password (" +
+           PasswordGenerator.DEFAULT_PASSWORD_LENGTH +
+           " chars long)";
   }
 }

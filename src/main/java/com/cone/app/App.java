@@ -3,6 +3,7 @@ package com.cone.app;
 import com.cone.services.commandline.EntryLister;
 import com.cone.services.commandline.EntryReader;
 import com.cone.services.commandline.EntryWizard;
+import com.cone.services.commandline.EntryWizardWithPasswordGeneration;
 import com.cone.services.commandline.Parameters;
 import com.cone.services.registry.RegistryWritter;
 import com.cone.services.utils.UuidGenerator;
@@ -23,10 +24,14 @@ public class App
             EntryWizard wiz = new EntryWizard();
             RegistryWritter registryWritter = new RegistryWritter(entryFilePath, wiz.getKey(), new UuidGenerator());
             registryWritter.addRegistry(wiz.getCredentials(), wiz.getDescription());
+        } else if(params.include("ap")) {
+            EntryWizardWithPasswordGeneration wiz = new EntryWizardWithPasswordGeneration();
+            RegistryWritter registryWritter = new RegistryWritter(entryFilePath, wiz.getKey(), new UuidGenerator());
+            registryWritter.addRegistry(wiz.getCredentials(), wiz.getDescription());
         } else if(params.include("r")) {
             EntryReader reader = new EntryReader(params.getValue("r"), entryFilePath);
             reader.display();
-        } else if(params.include("h")) {
+        } else {
             params.printHelp();
         }
     }
