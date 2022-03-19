@@ -4,7 +4,7 @@ import com.cone.app.Credentials;
 import com.cone.services.commandline.interfaces.Wizard;
 import com.cone.utils.PasswordGenerator;
 
-public class EntryWizardWithPasswordGeneration extends KeyBasedAction implements Wizard {
+public class EntryWizardWithPasswordGeneration extends PasswordBasedAction implements Wizard {
   Credentials creds;
   String desc;
 

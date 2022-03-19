@@ -10,7 +10,7 @@ import com.cone.app.Credentials;
 import com.cone.services.registry.RegistryReader;
 import com.cone.services.utils.FileLocator;
 
-public class EntryReader extends KeyBasedAction {
+public class EntryReader extends PasswordBasedAction {
   String id;
   String entriesFilePath;
   RegistryReader reader;
@@ -19,7 +19,7 @@ public class EntryReader extends KeyBasedAction {
   public EntryReader(String id, String entriesFilePath) throws URISyntaxException {
     this.id = id;
     this.entriesFilePath = entriesFilePath;
-    reader = new RegistryReader(getEntriesFile(), getKey());
+    reader = new RegistryReader(getEntriesFile(), getPassword());
   }
 
   public void display() throws Exception {

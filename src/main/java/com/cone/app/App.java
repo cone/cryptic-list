@@ -38,7 +38,7 @@ public class App
   }
 
   private static void write(Wizard wiz) throws Exception {
-    EntryWritter entryWritter = new EntryWritter(ENTRY_FILE_PATH, wiz.getKey(), new UuidGenerator());
+    EntryWritter entryWritter = new EntryWritter(ENTRY_FILE_PATH, wiz.getPassword(), new UuidGenerator());
     entryWritter.addRegistry(wiz.getCredentials(), wiz.getDescription());
   }
 }

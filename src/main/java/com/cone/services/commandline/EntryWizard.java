@@ -3,7 +3,7 @@ package com.cone.services.commandline;
 import com.cone.app.Credentials;
 import com.cone.services.commandline.interfaces.Wizard;
 
-public class EntryWizard extends KeyBasedAction implements Wizard {
+public class EntryWizard extends PasswordBasedAction implements Wizard {
   Credentials creds;
   String desc;
 
