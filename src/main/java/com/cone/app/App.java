@@ -4,32 +4,29 @@ import com.cone.services.commandline.EntryLister;
 import com.cone.services.commandline.EntryReader;
 import com.cone.services.commandline.EntryWizard;
 import com.cone.services.commandline.EntryWizardWithPasswordGeneration;
+import com.cone.services.commandline.EntryWritter;
 import com.cone.services.commandline.Parameters;
-import com.cone.services.registry.RegistryWritter;
+import com.cone.services.commandline.interfaces.Wizard;
 import com.cone.services.utils.UuidGenerator;
 
 public class App 
 {
+  static final String ENTRY_FILE_PATH = "data.json";
+
   public static void main( String[] args )
   {
-    String entryFilePath = "data.json";
-
     try {
         Parameters params = new Parameters(args);
 
         if(params.include("ls")) {
-            EntryLister entryLister = new EntryLister(entryFilePath);
+            EntryLister entryLister = new EntryLister(ENTRY_FILE_PATH);
             entryLister.list();
         } else if(params.include("a")) {
-            EntryWizard wiz = new EntryWizard();
-            RegistryWritter registryWritter = new RegistryWritter(entryFilePath, wiz.getKey(), new UuidGenerator());
-            registryWritter.addRegistry(wiz.getCredentials(), wiz.getDescription());
+            write(new EntryWizard());
         } else if(params.include("ap")) {
-            EntryWizardWithPasswordGeneration wiz = new EntryWizardWithPasswordGeneration();
-            RegistryWritter registryWritter = new RegistryWritter(entryFilePath, wiz.getKey(), new UuidGenerator());
-            registryWritter.addRegistry(wiz.getCredentials(), wiz.getDescription());
+            write(new EntryWizardWithPasswordGeneration());
         } else if(params.include("r")) {
-            EntryReader reader = new EntryReader(params.getValue("r"), entryFilePath);
+            EntryReader reader = new EntryReader(params.getValue("r"), ENTRY_FILE_PATH);
             reader.display();
         } else {
             params.printHelp();
@@ -38,5 +35,10 @@ public class App
     catch (Exception exp) {
         System.err.println("Something went wrong: " + exp.getMessage());
     }
+  }
+
+  private static void write(Wizard wiz) throws Exception {
+    EntryWritter entryWritter = new EntryWritter(ENTRY_FILE_PATH, wiz.getKey(), new UuidGenerator());
+    entryWritter.addRegistry(wiz.getCredentials(), wiz.getDescription());
   }
 }

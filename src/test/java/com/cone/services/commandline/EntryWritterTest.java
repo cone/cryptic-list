@@ -1,4 +1,4 @@
-package com.cone.services.registry;
+package com.cone.services.commandline;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -15,8 +15,8 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class RegistryWritterTest {
-  static RegistryWritter subject;
+public class EntryWritterTest {
+  static EntryWritter subject;
   static IdGenerator fakeGenerator;
   static final String jsonFilePath = "somefile.json";
   static String encryptedFilePath;
@@ -35,7 +35,7 @@ public class RegistryWritterTest {
   }
 
   private static void setupSubject() throws URISyntaxException {
-    subject = new RegistryWritter(jsonFilePath, "qwerty", fakeGenerator);
+    subject = new EntryWritter(jsonFilePath, "qwerty", fakeGenerator);
   }
 
   private static void setupFilePaths() throws URISyntaxException {
@@ -70,3 +70,4 @@ public class RegistryWritterTest {
     assertTrue(createdjsonFile.exists());
   }
 }
+

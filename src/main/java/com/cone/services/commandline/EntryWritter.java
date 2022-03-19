@@ -1,18 +1,19 @@
-package com.cone.services.registry;
+package com.cone.services.commandline;
 
 import java.io.File;
 import java.net.URISyntaxException;
 
 import com.cone.app.Credentials;
+import com.cone.services.registry.RegistryCreator;
 import com.cone.services.utils.FileLocator;
 import com.cone.services.utils.IdGenerator;
 
-public class RegistryWritter {
+public class EntryWritter {
   String entriesFile, key;
   RegistryCreator service;
   IdGenerator idGenerator;
 
-  public RegistryWritter(String entriesFile, String key, IdGenerator idGenerator)
+  public EntryWritter(String entriesFile, String key, IdGenerator idGenerator)
     throws URISyntaxException {
     this.entriesFile = entriesFile;
     this.key = key;
