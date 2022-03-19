@@ -24,6 +24,6 @@ public class EntryWizard extends KeyBasedAction implements Wizard {
     String password = new String(console.readPassword("user password: "));
     // TODO: The description shouldn't be part of the credentials
     desc = console.readLine("%s", "short description: ");
-    creds = new Credentials(user, password, desc);
+    creds = new Credentials(user, password);
   }
 }

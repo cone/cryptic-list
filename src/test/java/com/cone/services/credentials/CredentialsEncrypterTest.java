@@ -15,8 +15,8 @@ public class CredentialsEncrypterTest implements WithAssertions {
   @Test
   void testAdd() throws Exception {
 
-    File file = new File("delete.txt");
-    Credentials creds = new Credentials("cone@email.com", "qwerty123", "My credentials");
+    File file = new File("custom_iv_and_salt");
+    Credentials creds = new Credentials("cone@email.com", "qwerty123");
     String password = "mypass";
     String salt = "12345678";
     byte[] iv = { 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8 };

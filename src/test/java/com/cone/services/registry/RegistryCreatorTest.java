@@ -34,7 +34,7 @@ public class RegistryCreatorTest implements WithAssertions {
 
   @Test
   void givenSomeCredentialsAndDescription_whenWritting_thenSuccess() throws Exception {
-    Credentials creds = new Credentials("cone@email.com", "qwerty123", "Description");
+    Credentials creds = new Credentials("cone@email.com", "qwerty123");
     service.write(creds, "My Credentials", fileId);
 
     Scanner myReader = new Scanner(outputFile);

@@ -53,14 +53,14 @@ public class EntryWritterTest {
 
   @Test
   void givenJsonFilePath_whenRun_thenNoErrors() {
-    Credentials creds = new Credentials("user", "password", "shortDescription");
+    Credentials creds = new Credentials("user", "password");
 
     assertDoesNotThrow(() -> subject.addRegistry(creds, "description"));
   }
 
   @Test
   void givenJsonFilePath_whenRun_thenSuccess() throws Exception {
-    Credentials creds = new Credentials("user", "password", "shortDescription");
+    Credentials creds = new Credentials("user", "password");
     subject.addRegistry(creds, "description");
 
     File encryptedFile = new File(encryptedFilePath);

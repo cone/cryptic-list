@@ -25,8 +25,8 @@ public class RegistryReaderTest {
   }
 
   static void copyTestFiles() throws IOException {
-    Path copiedPath = Paths.get("target/12345678");
-    Path originalPath = Paths.get("src/test/resources/12345678");
+    Path copiedPath = Paths.get("target/hardcoded_iv_and_salt");
+    Path originalPath = Paths.get("src/test/resources/hardcoded_iv_and_salt");
     Files.copy(originalPath, copiedPath, StandardCopyOption.REPLACE_EXISTING);
   }
 
@@ -34,12 +34,12 @@ public class RegistryReaderTest {
   void whenAllEntriesAreListed_thenSuccess() {
     Map<String, String> entries = service.listAll();
 
-    Assertions.assertEquals("My Credentials", entries.get("12345678"));
+    Assertions.assertEquals("My Credentials", entries.get("hardcoded_iv_and_salt"));
   }
 
   @Test
   void givenAFilePath_whenReadingAnEntry_thenSuccess() throws Exception {
-    Credentials creds = service.read("12345678");
+    Credentials creds = service.read("hardcoded_iv_and_salt");
 
     Assertions.assertEquals("cone@email.com", creds.getUser());
   }

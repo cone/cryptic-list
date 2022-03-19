@@ -24,6 +24,6 @@ public class EntryWizardWithPasswordGeneration extends KeyBasedAction implements
     String user = console.readLine("%s", "user (email or name): ");
     String password = PasswordGenerator.getPassword(PasswordGenerator.DEFAULT_PASSWORD_LENGTH);
     desc = console.readLine("%s", "short description: ");
-    creds = new Credentials(user, password, desc);
+    creds = new Credentials(user, password);
   }
 }

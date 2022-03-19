@@ -15,7 +15,7 @@ public class CredentialsDecryperTest implements WithAssertions {
   @Test
   void testGet() throws Exception {
 
-    File objectFile = Paths.get("src/test/resources/object.txt").toFile();
+    File objectFile = Paths.get("src/test/resources/custom_iv_and_salt").toFile();
     String password = "mypass";
     String salt = "12345678";
     byte[] iv = { 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8 };
