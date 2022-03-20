@@ -23,6 +23,7 @@ public class EntryWritter {
 
   public void addRegistry(Credentials creds, String description) throws Exception {
     service.write(creds, description, idGenerator.createNewId());
+    System.out.println("The entry has been created succesfully.");
   }
 
   private File getEntriesFile() throws URISyntaxException {

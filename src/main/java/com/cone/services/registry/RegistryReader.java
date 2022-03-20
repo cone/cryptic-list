@@ -22,14 +22,13 @@ public class RegistryReader extends RegistryBase {
   }
 
   public Credentials read(String key) throws Exception {
-    File objectFile = getCredentialsFile(key);
     IvParameterSpec iv = getIV();
-    CredentialsDecrypter decrypter = new CredentialsDecrypter(password, SALT, iv, objectFile);
+    CredentialsDecrypter decrypter = new CredentialsDecrypter(password, SALT, iv, getCredentialsFile(key));
     return decrypter.read();
   }
 
   private File getCredentialsFile(String path) throws URISyntaxException {
-    String inputFilePath = FileLocator.getPath(path);
-    return new File(inputFilePath);
+    String objectFile = FileLocator.getPath(path);
+    return new File(objectFile);
   }
 }

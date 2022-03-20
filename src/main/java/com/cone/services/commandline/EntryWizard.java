@@ -22,7 +22,6 @@ public class EntryWizard extends PasswordBasedAction implements Wizard {
   private void askForCredentials() {
     String user = console.readLine("%s", "user (email or name): ");
     String password = new String(console.readPassword("user password: "));
-    // TODO: The description shouldn't be part of the credentials
     desc = console.readLine("%s", "short description: ");
     creds = new Credentials(user, password);
   }
