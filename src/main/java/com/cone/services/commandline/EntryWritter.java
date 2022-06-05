@@ -9,14 +9,14 @@ import com.cone.services.utils.FileLocator;
 import com.cone.services.utils.IdGenerator;
 
 public class EntryWritter {
-  String entriesFile, key;
+  String entriesFile, password;
   RegistryCreator service;
   IdGenerator idGenerator;
 
-  public EntryWritter(String entriesFile, String key, IdGenerator idGenerator)
+  public EntryWritter(String entriesFile, String password, IdGenerator idGenerator)
     throws URISyntaxException {
     this.entriesFile = entriesFile;
-    this.key = key;
+    this.password = password;
     this.idGenerator = idGenerator;
     initCreator();
   }
@@ -32,6 +32,6 @@ public class EntryWritter {
   }
 
   private void initCreator() throws URISyntaxException {
-    service = new RegistryCreator(getEntriesFile(), key);
+    service = new RegistryCreator(getEntriesFile(), password);
   }
 }
