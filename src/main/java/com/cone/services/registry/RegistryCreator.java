@@ -8,23 +8,21 @@ import javax.crypto.spec.IvParameterSpec;
 import com.cone.app.Credentials;
 import com.cone.services.credentials.CredentialsEncrypter;
 import com.cone.services.jsonfile.JsonFileCreator;
-import com.cone.services.utils.FileLocator;
 
 public class RegistryCreator extends RegistryBase {
-  public RegistryCreator(File entriesFile, String password) {
+  public RegistryCreator(File entriesFile, String encriptedObjectFilePath, String password) {
     this.entriesFile = entriesFile;
+    this.encryptedObjectFilePath = encriptedObjectFilePath;
     this.password = password;
   }
 
-  public void write(Credentials creds, String description, String fileId)
+  public void write(Credentials creds, String description, String fileName)
     throws Exception {
     loadEntries();
+    File encriptedObjectFile = new File(encryptedObjectFilePath + fileName);
+    encryptEntry(encriptedObjectFile, creds);
 
-    String outputFilePath = FileLocator.getPath(fileId);
-    File outputFile = new File(outputFilePath);
-    encryptEntry(outputFile, creds);
-
-    entries.put(fileId, description);
+    entries.put(fileName.toString(), description);
     writeFile(entriesFile, entries);
   }
 

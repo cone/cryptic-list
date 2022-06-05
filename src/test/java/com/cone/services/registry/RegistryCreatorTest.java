@@ -5,7 +5,6 @@ import java.net.URISyntaxException;
 import java.util.Scanner;
 
 import com.cone.app.Credentials;
-import com.cone.services.utils.FileLocator;
 
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.AfterEach;
@@ -17,13 +16,13 @@ public class RegistryCreatorTest implements WithAssertions {
   File outputFile;
   File objectFile;
   RegistryCreator service;
-  final String fileId = "12345678";
+  final String filePath = "12345678";
 
   @BeforeEach
   void setup() throws URISyntaxException {
     outputFile = new File("data.json");
-    objectFile = new File(FileLocator.getPath(fileId));
-    service = new RegistryCreator(outputFile, "qwerty");
+    objectFile = new File(filePath);
+    service = new RegistryCreator(outputFile, "", "qwerty");
   }
 
   @AfterEach
@@ -35,7 +34,7 @@ public class RegistryCreatorTest implements WithAssertions {
   @Test
   void givenSomeCredentialsAndDescription_whenWritting_thenSuccess() throws Exception {
     Credentials creds = new Credentials("cone@email.com", "qwerty123");
-    service.write(creds, "My Credentials", fileId);
+    service.write(creds, "My Credentials", filePath);
 
     Scanner myReader = new Scanner(outputFile);
     String data = "";

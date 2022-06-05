@@ -8,11 +8,11 @@ import javax.crypto.spec.IvParameterSpec;
 
 import com.cone.app.Credentials;
 import com.cone.services.credentials.CredentialsDecrypter;
-import com.cone.services.utils.FileLocator;
 
 public class RegistryReader extends RegistryBase {
-  public RegistryReader(File entriesFile, String password) {
+  public RegistryReader(File entriesFile, String encryptedObjectFilePath, String password) {
     this.entriesFile = entriesFile;
+    this.encryptedObjectFilePath = encryptedObjectFilePath;
     this.password = password;
   }
 
@@ -21,14 +21,14 @@ public class RegistryReader extends RegistryBase {
     return entries;
   }
 
-  public Credentials read(String key) throws Exception {
+  public Credentials read(String fileName) throws Exception {
     IvParameterSpec iv = getIV();
-    CredentialsDecrypter decrypter = new CredentialsDecrypter(password, SALT, iv, getCredentialsFile(key));
+    CredentialsDecrypter decrypter = new CredentialsDecrypter(password, SALT, iv, getCredentialsFile(fileName));
     return decrypter.read();
   }
 
-  private File getCredentialsFile(String path) throws URISyntaxException {
-    String objectFile = FileLocator.getPath(path);
-    return new File(objectFile);
+  private File getCredentialsFile(String fileName) throws URISyntaxException {
+    String fullPath = encryptedObjectFilePath + fileName;
+    return new File(fullPath);
   }
 }

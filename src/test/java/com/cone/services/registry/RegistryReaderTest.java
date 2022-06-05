@@ -20,7 +20,7 @@ public class RegistryReaderTest {
   @BeforeAll
   static void setup() throws IOException {
     File jsonFile = new File("src/test/resources/data.json");
-    service = new RegistryReader(jsonFile, "qwerty");
+    service = new RegistryReader(jsonFile, "", "qwerty");
     copyTestFiles();
   }
 
@@ -39,7 +39,7 @@ public class RegistryReaderTest {
 
   @Test
   void givenAFilePath_whenReadingAnEntry_thenSuccess() throws Exception {
-    Credentials creds = service.read("hardcoded_iv_and_salt");
+    Credentials creds = service.read("target/hardcoded_iv_and_salt");
 
     Assertions.assertEquals("cone@email.com", creds.getUser());
   }

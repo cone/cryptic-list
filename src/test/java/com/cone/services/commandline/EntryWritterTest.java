@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 
 import com.cone.app.Credentials;
+import com.cone.app.EntryData;
 import com.cone.services.utils.FileLocator;
 import com.cone.services.utils.IdGenerator;
 
@@ -21,26 +22,14 @@ public class EntryWritterTest {
   static final String jsonFilePath = "somefile.json";
   static String encryptedFilePath;
   static String createdjsonFilePath;
+  static EntryData data;
 
   @BeforeAll
   static void setup() throws URISyntaxException {
     setupIdGenerator();
-    setupSubject();
     setupFilePaths();
-  }
-
-  private static void setupIdGenerator() {
-    fakeGenerator = mock(IdGenerator.class);
-    when(fakeGenerator.createNewId()).thenReturn("12345678");
-  }
-
-  private static void setupSubject() throws URISyntaxException {
-    subject = new EntryWritter(jsonFilePath, "qwerty", fakeGenerator);
-  }
-
-  private static void setupFilePaths() throws URISyntaxException {
-    encryptedFilePath = FileLocator.getPath(fakeGenerator.createNewId());
-    createdjsonFilePath = FileLocator.getPath(jsonFilePath);
+    setupEntryData();
+    setupSubject();
   }
 
   @AfterEach
@@ -68,6 +57,29 @@ public class EntryWritterTest {
 
     assertTrue(encryptedFile.exists());
     assertTrue(createdjsonFile.exists());
+  }
+
+  private static void setupIdGenerator() {
+    fakeGenerator = mock(IdGenerator.class);
+    when(fakeGenerator.createNewId()).thenReturn("12345678");
+  }
+
+  private static void setupFilePaths() throws URISyntaxException {
+    encryptedFilePath = FileLocator.getPath(fakeGenerator.createNewId());
+    createdjsonFilePath = FileLocator.getPath(jsonFilePath);
+  }
+
+  private static void setupEntryData() throws URISyntaxException {
+    data = new EntryData(
+      jsonFilePath,
+      "",
+      "qwerty",
+      fakeGenerator
+    );
+  }
+
+  private static void setupSubject() throws URISyntaxException {
+    subject = new EntryWritter(data);
   }
 }
 

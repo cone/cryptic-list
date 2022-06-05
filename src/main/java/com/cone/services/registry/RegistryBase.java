@@ -11,6 +11,7 @@ import com.cone.services.jsonfile.JsonFileReader;
 
 public abstract class RegistryBase {
   File entriesFile;
+  String encryptedObjectFilePath;
   public final String SALT = "12345678";
   Map<String, String> entries;
   String password;

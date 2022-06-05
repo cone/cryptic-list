@@ -4,34 +4,37 @@ import java.io.File;
 import java.net.URISyntaxException;
 
 import com.cone.app.Credentials;
+import com.cone.app.EntryData;
 import com.cone.services.registry.RegistryCreator;
 import com.cone.services.utils.FileLocator;
 import com.cone.services.utils.IdGenerator;
 
 public class EntryWritter {
-  String entriesFile, password;
+  EntryData data;
   RegistryCreator service;
-  IdGenerator idGenerator;
 
-  public EntryWritter(String entriesFile, String password, IdGenerator idGenerator)
+  public EntryWritter(EntryData data)
     throws URISyntaxException {
-    this.entriesFile = entriesFile;
-    this.password = password;
-    this.idGenerator = idGenerator;
+    this.data = data;
     initCreator();
   }
 
   public void addRegistry(Credentials creds, String description) throws Exception {
-    service.write(creds, description, idGenerator.createNewId());
+    IdGenerator generator = data.getIdGenerator();
+    service.write(creds, description, generator.createNewId());
     System.out.println("The entry has been created succesfully.");
   }
 
   private File getEntriesFile() throws URISyntaxException {
-    String inputFilePath = FileLocator.getPath(entriesFile);
+    String inputFilePath = FileLocator.getPath(data.getEntriesFilePath());
     return new File(inputFilePath);
   }
 
+  private String getEncriptedObjectsPath() throws URISyntaxException {
+    return FileLocator.getPath(data.getEncriptedObjectsFilePath());
+  }
+
   private void initCreator() throws URISyntaxException {
-    service = new RegistryCreator(getEntriesFile(), password);
+    service = new RegistryCreator(getEntriesFile(), getEncriptedObjectsPath(), data.getPassword());
   }
 }

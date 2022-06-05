@@ -13,13 +13,15 @@ import com.cone.services.utils.FileLocator;
 public class EntryReader extends PasswordBasedAction {
   String id;
   String entriesFilePath;
+  String encryptedObjectFilePath;
   RegistryReader reader;
   final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
-  public EntryReader(String id, String entriesFilePath) throws URISyntaxException {
+  public EntryReader(String id, String entriesFilePath, String encryptedObjectFilePath) throws URISyntaxException {
     this.id = id;
     this.entriesFilePath = entriesFilePath;
-    reader = new RegistryReader(getEntriesFile(), getPassword());
+    this.encryptedObjectFilePath = encryptedObjectFilePath;
+    reader = new RegistryReader(getEntriesFile(), getEncryptedObjectPath(), getPassword());
   }
 
   public void display() throws Exception {
@@ -32,6 +34,10 @@ public class EntryReader extends PasswordBasedAction {
   private File getEntriesFile() throws URISyntaxException {
     String inputFilePath = FileLocator.getPath(entriesFilePath);
     return new File(inputFilePath);
+  }
+
+  private String getEncryptedObjectPath() throws URISyntaxException {
+    return FileLocator.getPath(encryptedObjectFilePath);
   }
 
   private void copyToClipboard(String data) {
