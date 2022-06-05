@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.cone.app.Credentials;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -24,10 +25,10 @@ public class RegistryReaderTest {
     copyTestFiles();
   }
 
-  static void copyTestFiles() throws IOException {
-    Path copiedPath = Paths.get("target/hardcoded_iv_and_salt");
-    Path originalPath = Paths.get("src/test/resources/hardcoded_iv_and_salt");
-    Files.copy(originalPath, copiedPath, StandardCopyOption.REPLACE_EXISTING);
+  @AfterAll
+  static void cleanup() throws IOException {
+    File encryptedFile = new File("target/hardcoded_iv_and_salt");
+    encryptedFile.delete();
   }
 
   @Test
@@ -42,5 +43,11 @@ public class RegistryReaderTest {
     Credentials creds = service.read("target/hardcoded_iv_and_salt");
 
     Assertions.assertEquals("cone@email.com", creds.getUser());
+  }
+
+  static void copyTestFiles() throws IOException {
+    Path copiedPath = Paths.get("target/hardcoded_iv_and_salt");
+    Path originalPath = Paths.get("src/test/resources/hardcoded_iv_and_salt");
+    Files.copy(originalPath, copiedPath, StandardCopyOption.REPLACE_EXISTING);
   }
 }
